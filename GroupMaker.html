@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        function doit() {
+            var people = ["Gregg", "Jasmine", "Michelle", "Trent"];
+            var roles = ["TANK", "HEAL", "DPS"];
+            var tanks = ["DRK", "PLD", "WAR", "GNB"];
+            var heals = ["WHM", "SCH", "AST"];
+            var dps = ["SAM", "NIN", "DRG", "BRD", "MNK", "DNC", "MCH", "RDM", "BLM", "SMN"];
+
+            var tank = getRandom(tanks);
+            var heal = getRandom(heals);
+            var dps1 = getRandom(dps);
+            var dps2 = getRandom(dps);
+
+            var peopleTracker = [];
+            var tankPerson = getRandom(people, peopleTracker);
+            var healPerson = getRandom(people, peopleTracker);
+            var dps1Person = getRandom(people, peopleTracker);
+            var dps2Person = getRandom(people, peopleTracker);
+
+            console.log(tankPerson + ': ' + tank);
+            console.log(healPerson + ': ' + heal);
+            console.log(dps1Person + ': ' + dps1);
+            console.log(dps2Person + ': ' + dps2);
+
+
+            document.getElementById("tankPerson").innerText = tankPerson;
+            document.getElementById("tankJob").innerText = tank;
+
+            document.getElementById("healPerson").innerText = healPerson;
+            document.getElementById("healJob").innerText = heal;
+
+            document.getElementById("dps1Person").innerText = dps1Person;
+            document.getElementById("dps1Job").innerText = dps1;
+
+            document.getElementById("dps2Person").innerText = dps2Person;
+            document.getElementById("dps2Job").innerText = dps2;
+            
+            var summary = tankPerson + ': ' + tank + ' / ' +
+            healPerson + ': ' + heal + ' / ' +
+            dps1Person + ': ' + dps1 + ' / ' +
+            dps2Person + ': ' + dps2;
+            navigator.clipboard.writeText(summary);
+            document.getElementById("summary").innerText = summary;
+        }
+
+        function getRandom(arr, tracker) {
+
+            var num = Math.floor(Math.random() * (arr.length));
+            if (tracker) {
+                console.log(tracker);
+                if (tracker.some(t => t == num)) {
+                    return getRandom(arr, tracker);
+                } else {
+                    tracker.push(num);
+                }
+
+            }
+            return arr[num];
+        }
+    </script>
+    <style>
+        *{
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body onload="doit()">
+    <table style="border-width:0px;color:white;width:500px" cellspacing="0" cellpadding="10">
+        <tr style="background-color: rgb(31, 30, 30);">
+            <th>Role</th>
+            <th>Person</th>
+            <th>Job</th>
+        </tr>
+        <tr style="background-color: #030860;">
+            <td>Tank</td>
+            <td id="tankPerson"></td>
+            <td id="tankJob"></td>
+        </tr>
+        <tr style="background-color: #036010;">
+            <td>Heal</td>
+            <td id="healPerson"></td>
+            <td id="healJob"></td>
+        </tr>
+        <tr style="background-color: #600303;">
+            <td>Dps 1</td>
+            <td id="dps1Person"></td>
+            <td id="dps1Job"></td>
+        </tr>
+        <tr style="background-color: #600303;">
+            <td>Dps 2</td>
+            <td id="dps2Person"></td>
+            <td id="dps2Job"></td>
+        </tr>        
+    </table>
+    <button onclick="doit()" style="width:500px">Roll</button>
+    <br/>
+    <div>Summary:</div>
+    <div  id="summary"></div>
+    
+</body>
+
+</html>
