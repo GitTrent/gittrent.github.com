@@ -2,13 +2,17 @@
 
 <head>
     <script type="text/javascript">
-        function doit() {
+        function doit(useBlue) {
             var people = ["Gregg", "Jasmine", "Michelle", "Trent"];
             var roles = ["TANK", "HEAL", "DPS"];
             var tanks = ["DRK", "PLD", "WAR", "GNB"];
             var heals = ["WHM", "SCH", "AST"];
             var dps = ["SAM", "NIN", "DRG", "BRD", "MNK", "DNC", "MCH", "RDM", "BLM", "SMN"];
-
+            if(useBlue){
+                tanks.push("BLU");
+                heals.push("BLU");
+                dps.push("BLU");
+            }
             var tank = getRandom(tanks);
             var heal = getRandom(heals);
             var dps1 = getRandom(dps);
@@ -68,7 +72,7 @@
     </style>
 </head>
 
-<body onload="doit()">
+<body onload="doit(false)">
     <table style="border-width:0px;color:white;width:500px" cellspacing="0" cellpadding="10">
         <tr style="background-color: rgb(31, 30, 30);">
             <th>Role</th>
@@ -96,7 +100,8 @@
             <td id="dps2Job"></td>
         </tr>        
     </table>
-    <button onclick="doit()" style="width:500px">Roll</button>
+    <button onclick="doit(false)" style="width:500px">Roll</button>
+    <button onclick="doit(true)" style="width:500px">Roll with BLU</button>
     <br/>
     <div>Summary:</div>
     <div  id="summary"></div>
